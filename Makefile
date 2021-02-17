@@ -1,9 +1,9 @@
-report:
+pdf-report:
 	@cd report && latexmk -pdf report.tex && mv report.pdf ../
 dev-report:
 	@cd report && latexmk -pvc -pdf -interaction=nonstopmode report.tex
 
-proposal:
+pdf-proposal:
 	@cd proposal && latexmk -pdf report.tex && mv report.pdf ../
 dev-proposal:
 	@cd proposal && latexmk -pvc -pdf -interaction=nonstopmode report.tex
