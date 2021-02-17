@@ -1,0 +1,32 @@
+name: LaTeX CI draft
+
+on:
+  pull_request:
+  push:
+    branches: 
+      - master
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:  
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        uses: xu-cheng/texlive-action/full@v1
+        with:
+          run: |
+            apk add make
+            make
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: draft
+          path: report.pdf
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.PAT_KEPET19 }}
+          repository: bierproductie/management
+          event-type: upload-artifacts
+          client-payload: '{"prnumber": "${{ github.event.number }}", "checkrunid": "${{ github.run_id }}"}'
