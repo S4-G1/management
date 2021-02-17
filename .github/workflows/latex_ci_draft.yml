@@ -27,6 +27,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.PAT_KEPET19 }}
-          repository: bierproductie/management
+          repository: S4-G1/management
           event-type: upload-artifacts
           client-payload: '{"prnumber": "${{ github.event.number }}", "checkrunid": "${{ github.run_id }}"}'
